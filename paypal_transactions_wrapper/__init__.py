@@ -129,7 +129,7 @@ class PayPalTransactionsApi:
             raise TransactionStatusNotFound("%s is not a valid status" % status)
         return getattr(self, "_get_%s_transactions" % status)
 
-    def get_transactions(self, start=None, status=None):
+    def get_transactions(self, start=None, end=None, status=None):
         if status is None:
             transaction_status = self.COMPLETED_STATUS
         else:
@@ -137,14 +137,5 @@ class PayPalTransactionsApi:
 
         transaction_by_status = self.__get_transaction_func_by_status(transaction_status)
 
-        return transaction_by_status(STARTDATE=self.__paypal_date_format('1980-01-01' if not start else start))
-
-    def get_transactions_between_dates(self, start, end, status=None):
-        if status is None:
-            transaction_status = self.COMPLETED_STATUS
-        else:
-            transaction_status = status
-
-        transaction_by_status = self.__get_transaction_func_by_status(transaction_status)
-
-        return transaction_by_status(STARTDATE=self.__paypal_date_format(start), ENDDATE=self.__paypal_date_format(end))
+        return transaction_by_status(STARTDATE=self.__paypal_date_format('1980-01-01' if not start else start),
+                                     ENDDATE=self.__paypal_date_format(end))

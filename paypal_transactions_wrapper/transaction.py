@@ -17,6 +17,9 @@ class Transaction:
     def __init__(self, transaction):
         self._transaction = transaction
 
+    def __str__(self):
+        return str(self._transaction)
+
     def __getattr__(self, item):
         if item in self._transaction:
             return self._transaction[item]
