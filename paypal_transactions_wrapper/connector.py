@@ -16,7 +16,7 @@ class PayPalTransactionsConnector:
                          "verify": True}
 
         self.__create_params(VERSION=self.__VERSION__,
-                             METHOD = self.__METHOD__,
+                             METHOD=self.__METHOD__,
                              USER=api_username,
                              PWD=api_password,
                              SIGNATURE=api_signature)
